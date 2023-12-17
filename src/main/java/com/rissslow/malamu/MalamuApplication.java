@@ -5,8 +5,8 @@ import com.rissslow.malamu.model.Evaluation;
 import com.rissslow.malamu.model.Star;
 import com.rissslow.malamu.repository.EntityRepository;
 import com.rissslow.malamu.repository.EvaluationRepository;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -30,7 +30,7 @@ public class MalamuApplication implements CommandLineRunner {
     EvaluationRepository evaluationRepository;
 
     void testCreationEntityDB(){
-        logger.info("Data creation started...");
+        logger.info("*********Data creation started*********");
 
 
 
@@ -54,7 +54,7 @@ public class MalamuApplication implements CommandLineRunner {
                 )
                 .build());
 
-        logger.info("*********Data creation complete...*********");
+        logger.info("*********Data creation complete*********");
 
     }
 
