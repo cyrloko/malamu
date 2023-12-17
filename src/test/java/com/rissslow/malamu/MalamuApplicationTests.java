@@ -26,9 +26,9 @@ class MalamuApplicationTests {
     public List<Evaluation> listOfStars(){
         return List.of(
                 Evaluation.builder()
-                .star(Star.THREE)
-                .description("Tout est ok un peu de retard")
-                .build(),
+                        .star(Star.THREE)
+                        .description("Tout est ok un peu de retard")
+                        .build(),
                 Evaluation.builder()
                         .star(Star.FIVE)
                         .description("Super")
@@ -62,7 +62,7 @@ class MalamuApplicationTests {
         Entity entity = anEntity();
 
         //then
-        assertEquals(3,entity.evaluations().size(),"Evaluations should contains 3 elements");
+        assertEquals(7,entity.evaluations().size(),"Evaluations should contains 7 elements");
 
 
     }
