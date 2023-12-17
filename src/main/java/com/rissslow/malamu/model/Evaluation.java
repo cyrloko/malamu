@@ -1,9 +1,9 @@
 package com.rissslow.malamu.model;
 
 import lombok.Builder;
-
-import java.util.UUID;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Builder
-public record Evaluation(UUID id, String description, Star star) {
-}
+@Document("evaluation")
+public record Evaluation(@Id String id,String description, Star star) {}
