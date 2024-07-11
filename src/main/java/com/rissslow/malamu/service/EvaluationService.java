@@ -1,38 +1,41 @@
 package com.rissslow.malamu.service;
 
-import com.rissslow.malamu.exception.DatabaseSearchException;
+import com.rissslow.malamu.exception.DefaultException;
 import com.rissslow.malamu.model.Evaluation;
 import com.rissslow.malamu.repository.EvaluationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+
+import static com.rissslow.malamu.exception.DefaultError.ENTITY_NOT_FOUND;
+
 
 @Service
+@RequiredArgsConstructor
 public class EvaluationService {
 
-    @Autowired
-    EvaluationRepository evaluationRepository;
+    private final EvaluationRepository evaluationRepository;
 
-    public Evaluation searchEvaluation(String id) throws DatabaseSearchException {
+    public Evaluation searchEvaluation(String id) throws DefaultException {
         return searchEvaluation(Evaluation.builder().id(id).build());
     }
 
-    public Evaluation searchEvaluation(Evaluation evaluation) throws DatabaseSearchException {
+    public Evaluation searchEvaluation(Evaluation evaluation) throws DefaultException {
 
         Optional<Evaluation> optEvaluation = evaluationRepository.findById(evaluation.id());
 
-        return optEvaluation.orElseThrow(DatabaseSearchException::new);
+
+        return optEvaluation.orElseThrow(ENTITY_NOT_FOUND::getException);
     }
 
-    public Evaluation saveEvaluation(Evaluation evaluation){
+    public Evaluation saveEvaluation(Evaluation evaluation) throws DefaultException{
+
+        if(!Objects.isNull(evaluation.id())) throw new DefaultException(400, "The id must not be provided");
 
         return evaluationRepository.insert(evaluation.toBuilder()
                 .id(calculateId(evaluation))
-                .build()
-        );
+                .build());
     }
 
     private static String calculateId(Evaluation evaluation) {
@@ -43,7 +46,7 @@ public class EvaluationService {
         return evaluationRepository.insert(evaluations);
     }
 
-    public Evaluation deleteEvaluation(Evaluation evaluation) throws DatabaseSearchException {
+    public Evaluation deleteEvaluation(Evaluation evaluation) throws DefaultException {
 
         Evaluation evaluationToDelete = searchEvaluation(evaluation);
 
@@ -52,7 +55,7 @@ public class EvaluationService {
         return evaluationToDelete;
     }
 
-    public Evaluation updateEvaluation(Evaluation evaluation) throws DatabaseSearchException {
+    public Evaluation updateEvaluation(Evaluation evaluation) throws DefaultException {
 
         Evaluation evaluationToUpdate = deleteEvaluation(evaluation);
 
@@ -62,8 +65,8 @@ public class EvaluationService {
                         .id(evaluationToUpdate.id())
                         .star(evaluation.star())
                         .description(evaluation.description())
-                        .build())
-                ;
+                        .build());
     }
 
 }
+

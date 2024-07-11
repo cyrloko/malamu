@@ -2,7 +2,7 @@ package com.rissslow.malamu.service;
 
 import org.junit.jupiter.api.Test;
 
-class EvaluationServiceTest {
+class EvaluationDTOServiceTest {
 
     @Test
     void searchEvaluation() {

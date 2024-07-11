@@ -1,0 +1,9 @@
+application:
+  title: malamu
+  version: 1.0.0-BETA
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: malamu

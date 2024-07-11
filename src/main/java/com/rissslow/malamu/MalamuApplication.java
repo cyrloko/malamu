@@ -5,28 +5,29 @@ import com.rissslow.malamu.model.Evaluation;
 import com.rissslow.malamu.model.Star;
 import com.rissslow.malamu.repository.EntityRepository;
 import com.rissslow.malamu.repository.EvaluationRepository;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.stream.*;
 
 @SpringBootApplication
 @EnableMongoRepositories
+@RequiredArgsConstructor
 public class MalamuApplication implements CommandLineRunner {
 
     Logger logger = LoggerFactory.getLogger(MalamuApplication.class);
 
-    @Autowired
+    @NonNull
     EntityRepository entityRepository;
 
-    @Autowired
+    @NonNull
     EvaluationRepository evaluationRepository;
 
     void testCreationEntityDB(){
@@ -76,7 +77,7 @@ public class MalamuApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        testCreationEntityDB();
+        //testCreationEntityDB();
         testReadEntityDB();
     }
 }
